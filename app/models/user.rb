@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    include PublicActivity::Model
+    tracked
     has_secure_password
     
     validates :username, uniqueness: true
