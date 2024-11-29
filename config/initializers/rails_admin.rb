@@ -6,7 +6,7 @@ RailsAdmin.config do |config|
   ## == Devise ==
   config.authenticate_with do
     authenticate_or_request_with_http_basic do |username, password|
-      username == 'admin' && password == 'password'
+      username == 'Edward' && password == 'Edward@12'
     end
   end
   # config.current_user_method(&:current_user)
