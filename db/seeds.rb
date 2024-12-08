@@ -1,5 +1,17 @@
+# First, let's clear existing data
+puts "Clearing existing data..."
+Discussion.destroy_all
+Review.destroy_all
 Book.destroy_all
+User.destroy_all
 
+puts "Creating users..."
+user1 = User.create!(username: "Murithi", password: "wewe")
+user2 = User.create!(username: "calvin", password: "kichwa")
+user3 = User.create!(username: "bookworm", password: "reading123")
+user4 = User.create!(username: "literature_fan", password: "books4life")
+
+puts "Creating books..."
 book1 = Book.create(
     "title": "The Eye of the World",
     "author": "Robert Jordan" ,
@@ -328,8 +340,40 @@ book1 = Book.create(
     "description": "After surviving a car accident on an icy road in Hagen, North Dakota, Lily Baker regains consciousness with no idea where or who she is. Scattered Bible verses and the image of a man lying in a pool of blood haunt her memory.The same night of the accident, a young woman is murdered and tossed in a dumpster. Kylie Milliard, Hagen’s only detective, doesn’t immediately recognize the victim, but Kylie soon discovers that Lily and the dead woman share a dark past…if only Lily could remember what it was.Lily and Kylie both want answers. But Kylie has to play by the book. Lily has to play it safe. And the more Lily learns about her identity, the more she fears the truth."
     
   )
-     user1 = User.create(username:"Murithi", password:"wewe")
-     user2 =  User.create(username: "calvin", password: "kichwa")
+
+puts "Creating sample discussions..."
+# Add some sample discussions for popular books
+Discussion.create!(
+  content: "The world-building in this book is incredible! What did everyone think about the Night's Watch?",
+  book: Book.find_by(title: "A Game of Thrones"),
+  user: user1
+)
+
+Discussion.create!(
+  content: "I can't believe what happened to Ned Stark! No spoilers, but wow...",
+  book: Book.find_by(title: "A Game of Thrones"),
+  user: user2
+)
+
+Discussion.create!(
+  content: "The magic system in this book is so well thought out. Anyone else fascinated by the Spren?",
+  book: Book.find_by(title: "The Way of Kings"),
+  user: user3
+)
+
+Discussion.create!(
+  content: "Just started reading this. The prologue was intense!",
+  book: Book.find_by(title: "The Way of Kings"),
+  user: user4
+)
+
+Discussion.create!(
+  content: "Gandalf is such an interesting character. What are your thoughts on his role?",
+  book: Book.find_by(title: "The Fellowship of the Ring"),
+  user: user1
+)
+
+puts "Seeding completed successfully!"
 
 
  

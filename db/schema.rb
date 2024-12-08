@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_29_204845) do
+ActiveRecord::Schema[7.0].define(version: 2024_12_07_150431) do
   create_table "activities", force: :cascade do |t|
     t.string "trackable_type"
     t.integer "trackable_id"
@@ -41,6 +41,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_29_204845) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "discussions", force: :cascade do |t|
+    t.text "content"
+    t.integer "book_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_discussions_on_book_id"
+    t.index ["user_id"], name: "index_discussions_on_user_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.integer "book_id"
     t.integer "user_id"
@@ -56,4 +66,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_29_204845) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "discussions", "books"
+  add_foreign_key "discussions", "users"
 end
