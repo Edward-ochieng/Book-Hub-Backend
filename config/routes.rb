@@ -3,9 +3,8 @@ Rails.application.routes.draw do
   resources :reviews, only:[:update,:create,:destroy,:index]
   resources :users
   resources :books, only:[:index, :show] do
-    resources :discussions, only: [:index, :create]
+    resources :discussions, only: [:index, :create, :destroy]
   end
-  resources :discussions, only: [:destroy]
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
   post "/login", to: "sessions#create"

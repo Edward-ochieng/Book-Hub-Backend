@@ -41,6 +41,11 @@ class DiscussionsController < ApplicationController
     discussion = Discussion.find(params[:id])
     if discussion.user_id == session[:user_id]
       discussion.destroy
+      # Broadcast the deletion
+      ActionCable.server.broadcast "book_#{discussion.book_id}", {
+        action: "delete",
+        id: discussion.id
+      }
       head :no_content
     else
       render json: { error: "Not authorized" }, status: :unauthorized
